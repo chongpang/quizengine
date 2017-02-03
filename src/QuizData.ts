@@ -19,13 +19,22 @@ class QuizData {
   // 17-> What belongs, recall the members of a series of categories.
   private quizType: number;
   private userId:  string;
+  private dataTable: {[key: string]: string}[];
+  private lrsConfig: {[key: string]: string};
+  private strategies: any;
 
-  constructor( quizType, userId) {
-    this.quizType =quizType;
+
+  constructor( userId, dataTable, lrsConfig, strategies) {
     this.userId = userId;
+    this.dataTable = dataTable;
+    this.lrsConfig = lrsConfig;
+    this.strategies = strategies;
   }
 
-  getQuizype(): number {
+  getQuizType(): number {
+    if(this.strategies != null){
+      this.quizType = this.strategies.quizType;
+    }
     return this.quizType;
   }
 
@@ -33,19 +42,29 @@ class QuizData {
     return this.userId;
   }
 
+  getDataTable(): any {
+    return this.dataTable;
+  }
+
+  getStrategies(): any {
+    return this.strategies;
+  }
+
   // toJSON is automatically used by JSON.stringify
-  toJSON(): QuizDataSON {
+  toJSON(): QuizDataJSON {
     // copy all fields from `this` to an empty object and return in
     return Object.assign({}, this, {
       // convert fields that need converting
-      quizType: this.quizType,
-      userId: this.userId
+      userId: this.userId,
+      lrsConfig: this.lrsConfig,
+      dataTable: this.dataTable,
+      strategies: this.strategies
     });
   }
 
   // fromJSON is used to convert an serialized version
   // of the User to an instance of the class
-  static fromJSON(json: QuizDataSON|string): QuizData {
+  static fromJSON(json: QuizDataJSON|string): QuizData {
     if (typeof json === 'string') {
       // if it's a string, parse it first
       return JSON.parse(json, QuizData.reviver);
@@ -68,9 +87,9 @@ class QuizData {
 
 // A representation of User's data that can be converted to
 // and from JSON without being altered.
-interface QuizDataSON {
+interface QuizDataJSON {
   userId:    string;
-  quizType:  number;
   dataTable: {[key: string]: string}[];
   lrsConfig: {[key: string]: string};
+  strategies: any;
 }

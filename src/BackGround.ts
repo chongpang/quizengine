@@ -6,7 +6,6 @@ class BackGround extends Laya.Sprite {
         super();
         this.init();
     }
-
     init(): void {
         //创建背景1
         this.bg1 = new Laya.Sprite();

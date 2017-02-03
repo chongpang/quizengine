@@ -3,7 +3,7 @@
     "type":"View",
     "selectedBox":1,
     "selecteID":5,
-    "props":{"width":480,"sceneColor":"#000000","height":852},
+    "props":{"width":480,"stateNum":"1","sceneColor":"#000000","height":852},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -19,26 +19,6 @@
         }],
     "compId":1,
     "child":[
-        {
-            "x":15,
-            "type":"Button",
-            "props":{"y":162,"x":203,"var":"pauseBtn","stateNum":"1","skin":"quizengine/btn_pause.png"},
-            "nodeParent":1,
-            "label":"Button(pauseBtn)",
-            "isDirectory":false,
-            "isAniNode":true,
-            "hasChild":false,
-            "frames":[
-                {
-                    "type":1,
-                    "props":{"y":162,"x":218,"skin":"quizengine/btn_pause.png","label":"label"},
-                    "frame":0,
-                    "__InPool":false
-                }],
-            "compId":2,
-            "child":[
-                ]
-        },
         {
             "x":15,
             "type":"Label",
@@ -82,7 +62,7 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":282,"x":171,"var":"infoLabel","text":"Game Over!","styleSkin":"quizengine/label.png","fontSize":28,"font":"Microsoft YaHei","color":"#fb510f","bold":true},
+            "props":{"y":296,"x":59,"width":364,"var":"infoLabel","text":"Game Over!","styleSkin":"quizengine/label.png","height":28,"fontSize":28,"font":"Microsoft YaHei","color":"#fb510f","bold":true,"align":"center"},
             "nodeParent":1,
             "label":"Label(infoLabel)",
             "isDirectory":false,
@@ -96,6 +76,26 @@
                     "__InPool":false
                 }],
             "compId":5,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":201,"x":203,"var":"pauseBtn","stateNum":"1","skin":"quizengine/btn_pause.png"},
+            "nodeParent":1,
+            "label":"Button(pauseBtn)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"y":62,"x":401,"skin":"quizengine/btn_pause.png","label":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":7,
             "child":[
                 ]
         }],

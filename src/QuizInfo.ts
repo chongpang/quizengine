@@ -24,6 +24,8 @@ class QuizInfo extends ui.QuizInfoUI{
         e.stopPropagation();
         //暂停游戏
         this.infoLabel.text = "游戏已暂停，任意地方恢复游戏";
+
+        console.log(this.infoLabel.text);
     quizInstance.pause();
         Laya.stage.once("click", this, this.onStageClick)
     }
@@ -41,6 +43,12 @@ class QuizInfo extends ui.QuizInfoUI{
     //显示积分
     public score(value: number): void {
         this.scoreLabel.text = "Score:" + value;
+    }
+
+    public reset(): void {
+        this.infoLabel.text = "";
+        this.level(0);
+        this.score(0);
     }
 
 }
