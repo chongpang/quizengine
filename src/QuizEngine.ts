@@ -25,35 +25,41 @@ class QuizEngine{
 
         Laya.loader.load("res/atlas/quizengine.json", Laya.Handler.create(this, this.onLoaded), null, Laya.Loader.ATLAS);
 
-        //设置适配模式
+        // Screen resolution mode
         Laya.stage.scaleMode = "fixedwidth";//"fixedwidth";//"showall";
-        //设置剧中对齐
+        // Set align mode
         Laya.stage.alignH = "center";
-        //设置横竖屏
+        // Set creen mode
         Laya.stage.screenMode = "vertical";
 
         Laya.Stat.show(0, 50);
     }
 
     onLoaded(): void {
-        //把背景添加到舞台上显示出来
+        // Add background to stage
         var bg: BackGround = new BackGround();
         Laya.stage.addChild(bg);
 
-        //创建游戏信息UI
+        // Create quiz ui
         this.quizInfo = new QuizInfo();
-        //添加到舞台上
+        // Add to stage
         Laya.stage.addChild(this.quizInfo);
 
-        var quizItem = new QuizItem(this.quizData.getDataTable()[0], Laya.stage.width / 2 , Laya.stage.height / 2);
-
-        Laya.stage.addChild(quizItem);
-        //开始
+        // draw quiz items
+        this.createQuizItems( this.quizData.getDataTable() );
+        // Start
         this.restart();
+    }
+
+    createQuizItems( dataTable: any): void{
+
+       var quizItem = new QuizItem(dataTable[0], Laya.stage.width / 2 , Laya.stage.height / 2);
+
+       Laya.stage.addChild(quizItem);
     }
     
     restart(): void {
-        //重置游戏数据
+        // Reset quiz engine info
         this.score = 0;
         this.level = 0;
         this.quizInfo.reset();
@@ -61,21 +67,19 @@ class QuizEngine{
         this.resume();
     }
 
-       /**暂停 */
     public pause(): void {
         
-        //停止游戏主循环
+        // Stop engine loop
         Laya.timer.clear(this, this.onLoop);
-        //移除舞台的鼠标移动事件监听
+        // Remove mouse event
         Laya.stage.off("mousemove", this, this.onMouseMove);
     }
 
-    /**恢复 */
     public resume(): void {
 
-        //创建游戏主循环
+        // Create engine loop
         Laya.timer.frameLoop(1, this, this.onLoop);
-        //监听舞台的鼠标移动事件
+        // Monitoring mouse event
         Laya.stage.on("mousemove", this, this.onMouseMove);
     }
 
@@ -84,7 +88,6 @@ class QuizEngine{
     }
 
     onMouseMove(e: Laya.Event): void {
-        //始终保持影响和鼠标位置一致
 
     }
 }
