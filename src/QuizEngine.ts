@@ -21,16 +21,16 @@ class QuizEngine{
         console.log(this.quizData.getStrategies());
         console.log(this.quizData.getQuizType());
 
-        Laya.init(880, 1052, Laya.WebGL);
+        Laya.init(512, 1025, Laya.WebGL);
 
         Laya.loader.load("res/atlas/quizengine.json", Laya.Handler.create(this, this.onLoaded), null, Laya.Loader.ATLAS);
 
         //设置适配模式
-        Laya.stage.scaleMode = "showall";
+        Laya.stage.scaleMode = "fixedwidth";//"fixedwidth";//"showall";
         //设置剧中对齐
         Laya.stage.alignH = "center";
         //设置横竖屏
-        //Laya.stage.screenMode = "vertical";
+        Laya.stage.screenMode = "vertical";
 
         Laya.Stat.show(0, 50);
     }
@@ -45,10 +45,13 @@ class QuizEngine{
         //添加到舞台上
         Laya.stage.addChild(this.quizInfo);
 
+        var quizItem = new QuizItem(this.quizData.getDataTable()[0], Laya.stage.width / 2 , Laya.stage.height / 2);
+
+        Laya.stage.addChild(quizItem);
         //开始
         this.restart();
     }
-
+    
     restart(): void {
         //重置游戏数据
         this.score = 0;
@@ -61,8 +64,6 @@ class QuizEngine{
        /**暂停 */
     public pause(): void {
         
-        console.log("pause");
-
         //停止游戏主循环
         Laya.timer.clear(this, this.onLoop);
         //移除舞台的鼠标移动事件监听

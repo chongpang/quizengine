@@ -1,30 +1,9 @@
 {
     "frames": {
-        "btn_pause.png": {
-            "frame": {
-                "x": 0,
-                "y": 0,
-                "w": 60,
-                "h": 45,
-                "idx": 0
-            },
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 60,
-                "h": 45
-            },
-            "sourceSize": {
-                "w": 60,
-                "h": 45
-            },
-            "rotated": false,
-            "trimed": false
-        },
         "label.png": {
             "frame": {
                 "x": 0,
-                "y": 47,
+                "y": 0,
                 "w": 120,
                 "h": 18,
                 "idx": 0
