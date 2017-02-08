@@ -2,7 +2,7 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":7,
+    "selecteID":3,
     "props":{"width":480,"stateNum":"1","sceneColor":"#000000","height":852},
     "nodeParent":-1,
     "label":"View",
@@ -22,7 +22,7 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":55,"x":119,"var":"levelLabel","text":"Level: 1","styleSkin":"quizengine/label.png","fontSize":24,"font":"Microsoft YaHei","color":"#ee6b04","bold":true},
+            "props":{"y":57,"x":128,"width":109.296875,"var":"levelLabel","text":"Level: 1","styleSkin":"quizengine/label.png","height":32,"fontSize":32,"font":"Microsoft YaHei","color":"#f4eae2","bold":true},
             "nodeParent":1,
             "label":"Label(levelLabel)",
             "isDirectory":false,
@@ -42,7 +42,7 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":54,"x":268,"width":25.353515625,"var":"scoreLabel","text":"Score: 0","styleSkin":"quizengine/label.png","height":12,"fontSize":24,"font":"Microsoft YaHei","color":"#ee650b","bold":true},
+            "props":{"y":56,"x":256,"width":121,"var":"scoreLabel","text":"Score: 0","styleSkin":"quizengine/label.png","height":38,"fontSize":32,"font":"Microsoft YaHei","color":"#f6ece6","bold":true},
             "nodeParent":1,
             "label":"Label(scoreLabel)",
             "isDirectory":false,

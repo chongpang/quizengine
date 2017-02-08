@@ -13,7 +13,7 @@ class QuizInfo extends ui.QuizInfoUI{
      */
     public reset() : void {
         this.infoLabel.text = "";
-        this.level(0);
+        this.level(1);
         this.score(0);
     }
     

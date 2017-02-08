@@ -11,12 +11,14 @@ class QuizEngine{
     private level: number;
     private lastSelected: QuizItem;
     private quizItems: Array<QuizItem>;
+    private hittedIndex: number;
 
     // json string including gama data and all configs
     constructor( data: string)
     {
         this.lastSelected = null;
         this.quizItems=[];
+        this.hittedIndex = 0;
         // parse input data
         this.quizData = QuizData.fromJSON(data);
 
@@ -36,6 +38,8 @@ class QuizEngine{
         Laya.stage.screenMode = "vertical";
 
         Laya.Stat.show(0, 50);
+
+        Laya.SoundManager.playMusic("res/music/clippity-clop.mp3", 1);
     }
 
     onLoaded(): void {
@@ -49,7 +53,10 @@ class QuizEngine{
         Laya.stage.addChild(this.quizInfo);
 
         // create quiz items
-        this.createQuizItems( this.quizData.getDataTable() );
+        this.createQuizItems( this.quizData.getDataTable());
+
+        // Shuffle array
+        this.quizItems = QuizEngine.shuffle(this.quizItems);
 
         // Draw quiz items
         this.drawQuizItems();
@@ -60,12 +67,26 @@ class QuizEngine{
 
     createQuizItems( dataTable: any) :void{
         for(var i= 0; i< dataTable.length -1; i++){
-            var quizItemQ = new QuizItem(dataTable[i].quiz);
-            var quizItemA = new QuizItem(dataTable[i].answer);
+            var quizItemQ = new QuizItem(dataTable[i].quiz, i);
+            var quizItemA = new QuizItem(dataTable[i].answer, i);
             this.quizItems.push(quizItemQ);
             this.quizItems.push(quizItemA);
         }
     }
+
+    public static shuffle(array: Array<any>) :Array<any> {
+
+        var n = array.length, t, i;
+        while (n) {
+            i = Math.floor(Math.random() * n--);
+            t = array[n];
+            array[n] = array[i];
+            array[i] = t;
+        }
+
+    return array;
+    }
+
 
     drawQuizItems(): void{
 
@@ -73,9 +94,9 @@ class QuizEngine{
         var minItemHeigth :number = 60;
         var minItemInRow :number = 2;
         var minRowInStage: number = 10;
-        var minItemPadding :number = 5;
-        var minStagePadding :number = 80;
-        var minStageMarginTop :number = 100;
+        var minItemPadding :number = 15;
+        var minStagePadding :number = 60;
+        var minStageMarginTop :number = 150;
 
         var xTemp :number = minStagePadding;
         var yTemp :number = minStageMarginTop;
@@ -91,10 +112,6 @@ class QuizEngine{
                 xTemp = xTemp + minItemWidth + minItemPadding;
             }   
 
-            if( rowIndex >  1 ){
-                yTemp = yTemp + minItemHeigth + minItemPadding;
-            }
-
             console.log(xTemp);
             console.log(yTemp);
 
@@ -106,6 +123,9 @@ class QuizEngine{
             if(currentRowItemIndex > minItemInRow){
                 currentRowItemIndex = 1;
                 xTemp = minStagePadding;
+
+                yTemp = yTemp + minItemHeigth + minItemPadding;
+
                 rowIndex++;
             }
 
@@ -113,6 +133,27 @@ class QuizEngine{
                 break;
             }
         }       
+    }
+
+    public updateHittedIndex() : void{
+        this.hittedIndex++;
+    }
+
+    public updateScore() :void{
+        this.score += 100;
+        this.quizInfo.score(this.score);
+    }
+
+    public isFinish() : boolean{
+
+        if(this.hittedIndex == this.quizItems.length){
+
+            this.quizInfo.infoLabel.text= "Awsome! you win the game!";
+
+            return true;
+        }
+
+        return false;
     }
     
     restart(): void {
@@ -158,4 +199,4 @@ class QuizEngine{
 }
 
 // {'gamaType':1, 'gamaData':{},'userId':'useridqwertyu58678','lrs':{'endpoint':'http://lrs.xueduoduo.com','credentials':'encrypt string'}
-var quizInstance: QuizEngine = new QuizEngine('{"strategies":{"quizType":1, "rules":[{"quiz":"answer"}]},"lrsConfig":{"endPoint":"http://www.xueduoduo.cn:6061","credential":"23456789:3456789567"},"quizType":1,"userId":"useridqwertyu58678","dataTable": [{"quiz": "3+4", "answer": "7"},{"quiz": "2+3", "answer": "5"}, {"quiz": "1+2", "answer": "3"}, {"quiz": "1+9", "answer": "10"}]}');
+var quizInstance: QuizEngine = new QuizEngine('{"strategies":{"quizType":1, "rules":[{"quiz":"answer"}]},"lrsConfig":{"endPoint":"http://www.xueduoduo.cn:6061","credential":"23456789:3456789567"},"quizType":1,"userId":"useridqwertyu58678","dataTable": [{"quiz": "3+4", "answer": "7"},{"quiz": "2+3", "answer": "5"}, {"quiz": "1+2", "answer": "3"}, {"quiz": "1+9", "answer": "10"},  {"quiz": "2+6", "answer": "8"}, {"quiz": "1+3", "answer": "4"}, {"quiz": "6+3", "answer": "9"}]}');
