@@ -9,11 +9,14 @@ class QuizEngine{
     private quizInfo: QuizInfo;
     private score: number;
     private level: number;
+    private lastSelected: QuizItem;
+    private quizItems: Array<QuizItem>;
 
     // json string including gama data and all configs
     constructor( data: string)
     {
-
+        this.lastSelected = null;
+        this.quizItems=[];
         // parse input data
         this.quizData = QuizData.fromJSON(data);
 
@@ -45,17 +48,71 @@ class QuizEngine{
         // Add to stage
         Laya.stage.addChild(this.quizInfo);
 
-        // draw quiz items
+        // create quiz items
         this.createQuizItems( this.quizData.getDataTable() );
+
+        // Draw quiz items
+        this.drawQuizItems();
+
         // Start
         this.restart();
     }
 
-    createQuizItems( dataTable: any): void{
+    createQuizItems( dataTable: any) :void{
+        for(var i= 0; i< dataTable.length -1; i++){
+            var quizItemQ = new QuizItem(dataTable[i].quiz);
+            var quizItemA = new QuizItem(dataTable[i].answer);
+            this.quizItems.push(quizItemQ);
+            this.quizItems.push(quizItemA);
+        }
+    }
 
-       var quizItem = new QuizItem(dataTable[0], Laya.stage.width / 2 , Laya.stage.height / 2);
+    drawQuizItems(): void{
 
-       Laya.stage.addChild(quizItem);
+        var minItemWidth :number = 100;
+        var minItemHeigth :number = 60;
+        var minItemInRow :number = 2;
+        var minRowInStage: number = 10;
+        var minItemPadding :number = 5;
+        var minStagePadding :number = 80;
+        var minStageMarginTop :number = 100;
+
+        var xTemp :number = minStagePadding;
+        var yTemp :number = minStageMarginTop;
+        var rowIndex :number = 1;
+        var currentRowItemIndex :number = 1;
+
+        minItemInRow = (Laya.stage.width - minStagePadding * 2) / (minItemWidth + minItemPadding * 2);
+        minRowInStage = (Laya.stage.height - minStageMarginTop) / (minItemHeigth + minItemPadding * 2);
+
+        for (var i: number = 0; i < this.quizItems.length ; i++) {
+
+            if( currentRowItemIndex > 1){
+                xTemp = xTemp + minItemWidth + minItemPadding;
+            }   
+
+            if( rowIndex >  1 ){
+                yTemp = yTemp + minItemHeigth + minItemPadding;
+            }
+
+            console.log(xTemp);
+            console.log(yTemp);
+
+            this.quizItems[i].init(xTemp , yTemp, minItemWidth, minItemHeigth);
+            Laya.stage.addChild(this.quizItems[i]);
+
+            currentRowItemIndex++;
+
+            if(currentRowItemIndex > minItemInRow){
+                currentRowItemIndex = 1;
+                xTemp = minStagePadding;
+                rowIndex++;
+            }
+
+            if(rowIndex > minRowInStage){
+                break;
+            }
+        }       
     }
     
     restart(): void {
@@ -83,6 +140,14 @@ class QuizEngine{
         Laya.stage.on("mousemove", this, this.onMouseMove);
     }
 
+    public setLastSelected(item: QuizItem): void{
+        this.lastSelected = item;
+    }
+
+    public getLastSelected(): QuizItem{
+        return this.lastSelected;
+    }
+
     onLoop(): void {
 
     }
@@ -93,4 +158,4 @@ class QuizEngine{
 }
 
 // {'gamaType':1, 'gamaData':{},'userId':'useridqwertyu58678','lrs':{'endpoint':'http://lrs.xueduoduo.com','credentials':'encrypt string'}
-var quizInstance: QuizEngine = new QuizEngine('{"strategies":{"quizType":1, "rules":[{"formular":"result"}]},"lrsConfig":{"endPoint":"http://www.xueduoduo.cn:6061","credential":"23456789:3456789567"},"quizType":1,"userId":"useridqwertyu58678","dataTable": [{"formular": "3+4", "result": "7"},{"formular": "2+3", "result": "5"}, {"formular": "1+2", "result": "3"}]}');
+var quizInstance: QuizEngine = new QuizEngine('{"strategies":{"quizType":1, "rules":[{"quiz":"answer"}]},"lrsConfig":{"endPoint":"http://www.xueduoduo.cn:6061","credential":"23456789:3456789567"},"quizType":1,"userId":"useridqwertyu58678","dataTable": [{"quiz": "3+4", "answer": "7"},{"quiz": "2+3", "answer": "5"}, {"quiz": "1+2", "answer": "3"}, {"quiz": "1+9", "answer": "10"}]}');

@@ -6,40 +6,53 @@ class QuizItem extends Laya.Sprite{
 
     public x: number;
     public y: number;
+    public width: number;
+    public height: number;
+    public id: number;
+    public matchId:number;
+    public quiz: any;
 
-    constructor(item: any, x: number, y: number){
+    constructor( quiz: any ){
         super();
-
-        this.x = x;
-        this.y = y;
-        this.init(item);
+        this.quiz = quiz;
     }
 
     onClickQuizItem(): void {
-        console.log('clicked on item!');
+        if(quizInstance.getLastSelected() == this ){
+            console.log('Bingo! Cheers!');
+        }
+        quizInstance.setLastSelected(this)
     }
 
-    public init( item: any ): void{
+    public init(x: number, y: number, width:number, height:number): void{
+
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
 
         var txt = new Laya.Text();
-        txt.text = item.formular;
+        txt.text = this.quiz;
 	    //txt.width = 400;
 		//自动换行
 		txt.wordWrap = false;
 
 		txt.align = "center";
-		txt.fontSize = 80;
+		txt.fontSize = 60;
 		txt.font = "Microsoft YaHei";
 		txt.color = "#ff0000";
 		txt.bold = true;
 		txt.leading = 5;
 
-        this.height = 20;
-        this.width = 80;
-
         txt.on('click', this, this.onClickQuizItem);
-
         this.addChild(txt);
+    }
 
+    public setId( id: number): void{
+        this.id = id;
+    }
+
+    public setMatchId(id:number): void{
+        this.matchId = id;
     }
 }       
