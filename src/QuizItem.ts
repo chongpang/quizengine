@@ -11,6 +11,7 @@ class QuizItem extends Laya.Sprite{
     public quizIndex: number;
     public matchId:number;
     public quiz: any;
+    public txt: Laya.Text;
 
     constructor( quiz: any, quizIndex: number ){
         super();
@@ -42,12 +43,16 @@ class QuizItem extends Laya.Sprite{
 
                     return;
                 }else{
+                    quizInstance.getLastSelected().txt.bgColor = "#87CEEB";
                     quizInstance.setLastSelected(null);
                     Laya.SoundManager.playSound("res/music/error.wav");
+                    this.txt.bgColor = "#87CEEB";
+
                     return;
                 }
             }else{
                 Laya.SoundManager.playSound("res/music/click.wav");
+                this.txt.bgColor = "#7CFC00";
             }
             quizInstance.setLastSelected(this)
             
@@ -73,12 +78,14 @@ class QuizItem extends Laya.Sprite{
 		txt.font = "Microsoft YaHei";
 		txt.color = "#FFFFFF";
 		txt.bold = true;
-        txt.borderColor = "#FF0000";
+        txt.borderColor = "#BDB76B";
+        txt.bgColor = "#87CEEB";
         txt.width = width;
         txt.stroke = 5;
-        
 
         txt.on('click', this, this.onClickQuizItem);
+
+        this.txt = txt;
         this.addChild(txt);
     }
 
