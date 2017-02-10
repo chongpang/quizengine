@@ -6,7 +6,7 @@ class QuizEngine{
     // Data set. JSON string
     private dataJSON: string;
     private quizData: QuizData;
-    private quizInfo: QuizInfo;
+    public  quizInfo: QuizInfo;
     private score: number;
     private level: number;
     private lastSelected: QuizItem;
@@ -37,7 +37,7 @@ class QuizEngine{
         // Set creen mode
         Laya.stage.screenMode = "vertical";
 
-        Laya.Stat.show(0, 50);
+        //Laya.Stat.show(0, 50);
 
         Laya.SoundManager.playMusic("res/music/clippity-clop.mp3", 1);
     }
@@ -90,30 +90,29 @@ class QuizEngine{
 
     drawQuizItems(): void{
 
-        var minItemWidth :number = 100;
+        var minItemWidth :number = 110;
         var minItemHeigth :number = 60;
-        var minItemInRow :number = 2;
+        var minItemInRow :number = 3;
         var minRowInStage: number = 10;
-        var minItemPadding :number = 15;
-        var minStagePadding :number = 60;
-        var minStageMarginTop :number = 150;
+        var minItemPadding :number = 25;
+        var minStagePadding :number = 40;
+        var minStageMarginTop :number = 150; 
 
+        minItemWidth = (Laya.stage.width - ( minStagePadding * 2  +  (minItemInRow -1) * minItemPadding)) / minItemInRow;
+        
         var xTemp :number = minStagePadding;
         var yTemp :number = minStageMarginTop;
         var rowIndex :number = 1;
         var currentRowItemIndex :number = 1;
 
-        minItemInRow = (Laya.stage.width - minStagePadding * 2) / (minItemWidth + minItemPadding * 2);
-        minRowInStage = (Laya.stage.height - minStageMarginTop) / (minItemHeigth + minItemPadding * 2);
-
+        //minItemInRow = (Laya.stage.width - minStagePadding * 2) / (minItemWidth + minItemPadding * 2);
+        minRowInStage = Math.round((Laya.stage.height - minStageMarginTop) / (minItemHeigth + minItemPadding * 2));
+        console.log(minRowInStage);
         for (var i: number = 0; i < this.quizItems.length ; i++) {
 
             if( currentRowItemIndex > 1){
                 xTemp = xTemp + minItemWidth + minItemPadding;
             }   
-
-            console.log(xTemp);
-            console.log(yTemp);
 
             this.quizItems[i].init(xTemp , yTemp, minItemWidth, minItemHeigth);
             Laya.stage.addChild(this.quizItems[i]);
@@ -191,6 +190,17 @@ class QuizEngine{
 
     onLoop(): void {
 
+    }
+
+    public replay(){
+
+        this.lastSelected = null;
+        this.hittedIndex = 0;
+        this.score = 0;
+        this.level = 1;
+
+        this.quizInfo.reset();
+        this.drawQuizItems();
     }
 
     onMouseMove(e: Laya.Event): void {

@@ -4,8 +4,10 @@
 class QuizInfo extends ui.QuizInfoUI{
     constructor(){
         super();
-
+        this.replayBtn.on("click", this, this.onReplay);
         this.reset();
+
+        this.removeChild(this.replayBtn);
     }
 
     /**
@@ -15,6 +17,17 @@ class QuizInfo extends ui.QuizInfoUI{
         this.infoLabel.text = "";
         this.level(1);
         this.score(0);
+    }
+
+    /**
+     * reset
+     */
+    public onReplay(e: Laya.Event): void {
+        //阻止事件冒泡
+        e.stopPropagation();
+        quizInstance.replay();
+
+        this.removeChild(this.replayBtn);
     }
     
     //显示关卡级别

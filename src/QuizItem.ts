@@ -39,6 +39,8 @@ class QuizItem extends Laya.Sprite{
                     if(quizInstance.isFinish()){
                         console.log('Awsome, you win the game!');
                         Laya.SoundManager.playSound("res/music/win.wav");
+
+                        quizInstance.quizInfo.addChild(quizInstance.quizInfo.replayBtn);
                     }
 
                     return;

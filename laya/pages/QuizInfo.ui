@@ -2,8 +2,8 @@
     "x":0,
     "type":"View",
     "selectedBox":1,
-    "selecteID":3,
-    "props":{"width":480,"stateNum":"1","sceneColor":"#000000","height":852},
+    "selecteID":6,
+    "props":{"width":512,"stateNum":"1","sceneColor":"#000000","height":1025},
     "nodeParent":-1,
     "label":"View",
     "isOpen":true,
@@ -22,7 +22,7 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":57,"x":128,"width":109.296875,"var":"levelLabel","text":"Level: 1","styleSkin":"quizengine/label.png","height":32,"fontSize":32,"font":"Microsoft YaHei","color":"#f4eae2","bold":true},
+            "props":{"y":57,"x":144,"width":109.296875,"var":"levelLabel","text":"Level: 1","styleSkin":"quizengine/label.png","height":32,"fontSize":32,"font":"Microsoft YaHei","color":"#f4eae2","bold":true},
             "nodeParent":1,
             "label":"Label(levelLabel)",
             "isDirectory":false,
@@ -42,7 +42,7 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":56,"x":256,"width":121,"var":"scoreLabel","text":"Score: 0","styleSkin":"quizengine/label.png","height":38,"fontSize":32,"font":"Microsoft YaHei","color":"#f6ece6","bold":true},
+            "props":{"y":56,"x":267,"width":121,"var":"scoreLabel","text":"Score: 0","styleSkin":"quizengine/label.png","height":38,"fontSize":32,"font":"Microsoft YaHei","color":"#f6ece6","bold":true},
             "nodeParent":1,
             "label":"Label(scoreLabel)",
             "isDirectory":false,
@@ -62,7 +62,7 @@
         {
             "x":15,
             "type":"Label",
-            "props":{"y":296,"x":59,"width":364,"var":"infoLabel","text":"Game Over!","styleSkin":"quizengine/label.png","height":28,"fontSize":28,"font":"Microsoft YaHei","color":"#fb510f","bold":true,"align":"center"},
+            "props":{"y":296,"x":70,"width":364,"var":"infoLabel","text":"Game Over!","styleSkin":"quizengine/label.png","height":28,"fontSize":28,"font":"Microsoft YaHei","color":"#fb510f","bold":true,"align":"center"},
             "nodeParent":1,
             "label":"Label(infoLabel)",
             "isDirectory":false,
@@ -76,6 +76,26 @@
                     "__InPool":false
                 }],
             "compId":5,
+            "child":[
+                ]
+        },
+        {
+            "x":15,
+            "type":"Button",
+            "props":{"y":475,"x":202,"width":100,"var":"replayBtn","stateNum":"1","skin":"quizengine/replay_btn.png","labelSize":36,"labelFont":"Microsoft YaHei","labelAlign":"center","height":100,"gray":false,"alpha":50},
+            "nodeParent":1,
+            "label":"Button(replayBtn)",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "frames":[
+                {
+                    "type":1,
+                    "props":{"y":385,"x":257,"label":"label"},
+                    "frame":0,
+                    "__InPool":false
+                }],
+            "compId":6,
             "child":[
                 ]
         }],
