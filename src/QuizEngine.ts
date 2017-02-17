@@ -209,4 +209,4 @@ class QuizEngine{
 }
 
 // {'gamaType':1, 'gamaData':{},'userId':'useridqwertyu58678','lrs':{'endpoint':'http://lrs.xueduoduo.com','credentials':'encrypt string'}
-var quizInstance: QuizEngine = new QuizEngine('{"strategies":{"quizType":1, "rules":[{"quiz":"answer"}]},"lrsConfig":{"endPoint":"http://www.xueduoduo.cn:6061","credential":"23456789:3456789567"},"quizType":1,"userId":"useridqwertyu58678","dataTable": [{"quiz": "3+4", "answer": "7"},{"quiz": "2+3", "answer": "5"}, {"quiz": "1+2", "answer": "3"}, {"quiz": "1+9", "answer": "10"},  {"quiz": "2+6", "answer": "8"}, {"quiz": "1+3", "answer": "4"}, {"quiz": "6+3", "answer": "9"}]}');
+var quizInstance: QuizEngine = new QuizEngine('{"loID": "gsdgdsfgsdfgsdffgsdfg2345234523452345","strategies":{"quizType":1, "rules":[{"quiz":"answer"}]},"lrsConfig":{"endPoint":"http://www.xueduoduo.cn:6061","credential":"23456789:3456789567"},"quizType":1,"userId":"useridqwertyu58678","dataTable": [{"quiz": "3+4", "answer": "7"},{"quiz": "2+3", "answer": "5"}, {"quiz": "1+2", "answer": "3"}, {"quiz": "1+9", "answer": "10"},  {"quiz": "2+6", "answer": "8"}, {"quiz": "1+3", "answer": "4"}, {"quiz": "6+3", "answer": "9"}]}');

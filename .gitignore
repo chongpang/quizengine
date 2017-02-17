@@ -1,2 +1,7 @@
 bin/js/*
 release/
+dist/
+node_modules/
+build.log
+laya/1.6.1
+laya/tmp

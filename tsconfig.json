@@ -1,10 +1,22 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2015",
-    "sourceMap": true
+    "module": "amd",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "rootDir": "./",
+    "target": "es5",
+    "outFile": "./dist/release/assets/app.js"
   },
-  "exclude": [
-    "node_modules"
+  "files": [
+    "laya/1.6.1/ts/LayaAir.d.ts",
+    "src/ui/layaUI.max.all.ts",
+    "src/BackGround.ts",
+    "src/LStatement.ts",
+    "src/QuizData.ts",
+    "src/QuizEngine.ts",
+    "src/QuizInfo.ts",
+    "src/QuizItem.ts",
+    "src/Role.ts"
   ]
 }

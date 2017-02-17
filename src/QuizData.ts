@@ -1,3 +1,9 @@
+interface ObjectConstructor {
+    assign(target: any, ...sources: any[]): any;
+}
+
+let assign = Object.assign ? Object.assign : function(target: any, ...sources: any[]): any {};
+
 class QuizData {
 
   // 1-> Grid matching, identify pairs of info
@@ -22,13 +28,15 @@ class QuizData {
   private dataTable: {[key: string]: string}[];
   private lrsConfig: {[key: string]: string};
   private strategies: any;
+  private loID: string;
 
 
-  constructor( userId, dataTable, lrsConfig, strategies) {
+  constructor( userId: string, dataTable: {[key: string]: string}[], lrsConfig :{[key: string]: string}, strategies: any, loID: string) {
     this.userId = userId;
     this.dataTable = dataTable;
     this.lrsConfig = lrsConfig;
     this.strategies = strategies;
+    this.loID = loID;
   }
 
   getQuizType(): number {
@@ -50,6 +58,10 @@ class QuizData {
     return this.strategies;
   }
 
+  getLoID(): string {
+    return this.loID;
+  }
+
   // toJSON is automatically used by JSON.stringify
   toJSON(): QuizDataJSON {
     // copy all fields from `this` to an empty object and return in
@@ -58,7 +70,8 @@ class QuizData {
       userId: this.userId,
       lrsConfig: this.lrsConfig,
       dataTable: this.dataTable,
-      strategies: this.strategies
+      strategies: this.strategies,
+      loID: this.loID
     });
   }
 
@@ -92,4 +105,5 @@ interface QuizDataJSON {
   dataTable: {[key: string]: string}[];
   lrsConfig: {[key: string]: string};
   strategies: any;
+  loID: string;
 }
